@@ -1,11 +1,11 @@
 import time
 
-from brownie import ZERO_ADDRESS
+from brownie import ZERO_ADDRESS, chain
 
 
 def test_get_chain_id(factory):
     chain_id = factory.getChainId()
-    assert chain_id == 5
+    assert chain_id == chain.id
 
 
 def test_deploy_safe(safe, deployer):
