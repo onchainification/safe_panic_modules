@@ -12,6 +12,8 @@ contract ApprovalModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
     error ModuleMisconfigured();
 
+    error NotSigner(address safe, address executor);
+
     ////////////////////////////////////////////////////////////////////////////
     // EVENTS
     ////////////////////////////////////////////////////////////////////////////
@@ -22,6 +24,14 @@ contract ApprovalModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
     modifier isSigner(IGnosisSafe safe) {
         address[] memory signers = safe.getOwners();
+        bool isOwner;
+        for (uint256 i; i < signers.length; i++) {
+            if (signers[i] == msg.sender) {
+                isOwner = true;
+                break;
+            }
+        }
+        if (isOwner) revert NotSigner(address(safe), msg.sender);
         _;
     }
 
