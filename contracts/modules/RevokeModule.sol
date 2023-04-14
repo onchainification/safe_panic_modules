@@ -34,11 +34,11 @@ contract RevokeModule is BaseModule {
                 break;
             }
         }
-        if (isOwner) revert NotSigner(address(safe), msg.sender);
+        if (!isOwner) revert NotSigner(address(safe), msg.sender);
         _;
     }
 
-    function approve(IGnosisSafe safe, address token, address spender) external isSigner(safe) {
+    function revoke(IGnosisSafe safe, address token, address spender) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
 
         uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);

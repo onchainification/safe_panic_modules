@@ -3,24 +3,24 @@ from brownie import accounts, interface, ZERO_ADDRESS
 from brownie.convert.datatypes import EthAddress
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def factory():
     # https://github.com/safe-global/safe-contracts/blob/feature/1.4.0-deployment/CHANGELOG.md#factory-contracts
     return interface.ISafeProxyFactory("0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67")
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def safe_v1_4_0():
     # https://github.com/safe-global/safe-contracts/blob/feature/1.4.0-deployment/CHANGELOG.md#core-contracts
     return "0xc962E67D9490E154D81181879ddf4CD3b65D2132"
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def deployer():
     return accounts[0]
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def safe(factory, safe_v1_4_0, deployer):
     tx = factory.createProxyWithNonce(safe_v1_4_0, b"", 42, {"from": deployer})
     proxy_addr = tx.events["ProxyCreation"]["proxy"]  # or via tx.new_contracts[0]
