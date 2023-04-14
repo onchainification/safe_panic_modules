@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "safe-panic-module"
+version = "0.0.0"
+description = ""
+authors = ["Gosuto Inzasheru <gosuto@inzasheru.email>"]
+readme = "README.md"
+packages = [{include = "safe_panic_module"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+eth-brownie = "^1.19.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
