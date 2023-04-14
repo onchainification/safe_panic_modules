@@ -9,12 +9,6 @@ def a_token_whale(accounts):
 
 
 @pytest.fixture()
-def module(deployer):
-    module = AaveWithdrawModule.deploy({"from": deployer})
-    return module
-
-
-@pytest.fixture()
 def a_token():
     # aDAI
     # https://goerli.etherscan.io/address/0xADD98B0342e4094Ec32f3b67Ccfd3242C876ff7a
@@ -23,14 +17,11 @@ def a_token():
 
 
 @pytest.fixture()
-def collateral():
-    # https://goerli.etherscan.io/address/0xBa8DCeD3512925e52FE67b1b5329187589072A55
-    token = interface.IERC20("0xBa8DCeD3512925e52FE67b1b5329187589072A55")
-    return token
+def module(safe, a_token, deployer, a_token_whale):
+    # deployment
+    module = AaveWithdrawModule.deploy({"from": deployer})
 
-
-@pytest.fixture()
-def module_set_up(safe, module, a_token, a_token_whale):
+    # set-up config
     token_amount = 100e18
     a_token.transfer(safe, token_amount, {"from": a_token_whale})
 
@@ -39,3 +30,12 @@ def module_set_up(safe, module, a_token, a_token_whale):
     safe.enableModule(module.address, {"from": safe})
     address_one = "0x0000000000000000000000000000000000000001"
     assert module.address in safe.getModulesPaginated(address_one, 10)[0]
+
+    return module
+
+
+@pytest.fixture()
+def collateral():
+    # https://goerli.etherscan.io/address/0xBa8DCeD3512925e52FE67b1b5329187589072A55
+    token = interface.IERC20("0xBa8DCeD3512925e52FE67b1b5329187589072A55")
+    return token

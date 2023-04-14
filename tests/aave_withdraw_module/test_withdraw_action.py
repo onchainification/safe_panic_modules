@@ -1,7 +1,7 @@
 from brownie import reverts
 
 
-def test_withdraw(module, safe, deployer, a_token, collateral, module_set_up):
+def test_withdraw(module, safe, deployer, a_token, collateral):
     assert a_token.balanceOf(safe) > 0
     assert collateral.balanceOf(safe) == 0
     a_token_balance = a_token.balanceOf(safe)
@@ -16,6 +16,6 @@ def test_withdraw(module, safe, deployer, a_token, collateral, module_set_up):
     assert emerg_wd_event["signer"] == deployer
 
 
-def test_withdraw_not_rights(module, safe, collateral, module_set_up, accounts):
+def test_withdraw_not_rights(module, safe, collateral, accounts):
     with reverts():
         module.aaveV3Withdraw(safe, collateral, {"from": accounts[4]})
