@@ -21,7 +21,7 @@ contract AaveWithdrawModule is BaseModule {
 
     event EmergencyWithdraw(address asset, uint256 amount, address signer, uint256 timestamp);
 
-    function withdraw(IGnosisSafe safe, address collateral) external isSigner(safe) {
+    function aaveV3Withdraw(IGnosisSafe safe, address collateral) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
 
         DataTypes.ReserveData memory reserveData = AAVE_POOL.getReserveData(collateral);
