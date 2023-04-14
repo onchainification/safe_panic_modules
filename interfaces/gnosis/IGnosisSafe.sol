@@ -10,6 +10,9 @@ interface IGnosisSafe {
         DelegateCall
     }
 
+    /// @dev Returns array of owners.
+    function getOwners() external view returns (address[] memory);
+
     /// @dev Allows a Module to execute a Safe transaction without any further confirmations.
     /// @param to Destination address of module transaction.
     /// @param value Ether value of module transaction.

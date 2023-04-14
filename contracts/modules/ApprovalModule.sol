@@ -8,11 +8,26 @@ import {BaseModule} from "../BaseModule.sol";
 
 contract ApprovalModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
+    // ERRORS
+    ////////////////////////////////////////////////////////////////////////////
+    error ModuleMisconfigured();
+
+    ////////////////////////////////////////////////////////////////////////////
     // EVENTS
     ////////////////////////////////////////////////////////////////////////////
     event ZeroApprove(address safe, address token, address spender, uint256 timestamp);
 
-    function approve(IGnosisSafe safe, address token, address spender) internal {
+    ////////////////////////////////////////////////////////////////////////////
+    // MODIFIER
+    ////////////////////////////////////////////////////////////////////////////
+    modifier isSigner(IGnosisSafe safe) {
+        address[] memory signers = safe.getOwners();
+        _;
+    }
+
+    function approve(IGnosisSafe safe, address token, address spender) external isSigner(safe) {
+        if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
+
         uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);
         if (allowanceAmount > 0) {
             _checkTransactionAndExecute(safe, token, abi.encodeCall(IERC20.approve, (spender, 0)));
