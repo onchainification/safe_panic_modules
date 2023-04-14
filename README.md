@@ -23,4 +23,5 @@ We though that the factory could hook-up automatically the module deployed, but 
 
 ## Goerli testnet deployment
 
-- [module factory](https://goerli.etherscan.io/address/0xbaacd51a21e9047e8e58249574532f3dc55bfc28)
+- `ModuleFactory`
+  - Goerli: [0xbaAcd51a21e9047E8E58249574532F3dc55BFC28](https://goerli.etherscan.io/address/0xbaAcd51a21e9047E8E58249574532F3dc55BFC28)
