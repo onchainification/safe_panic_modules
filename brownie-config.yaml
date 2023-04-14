@@ -1,3 +1,5 @@
+dotenv: .env
+
 autofetch_sources: true
 
 dependencies:
