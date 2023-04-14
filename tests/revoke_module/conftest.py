@@ -1,13 +1,8 @@
 import pytest
-from brownie import ApprovalModule
+from brownie import RevokeModule
 
 
 OZ_DEPS = "OpenZeppelin/openzeppelin-contracts@4.5.0"
-
-
-@pytest.fixture
-def deployer(accounts):
-    return accounts[0]
 
 
 @pytest.fixture()
@@ -17,7 +12,7 @@ def rug_puller(accounts):
 
 @pytest.fixture()
 def module(deployer):
-    module = ApprovalModule.deploy({"from": deployer})
+    module = RevokeModule.deploy({"from": deployer})
     return module
 
 

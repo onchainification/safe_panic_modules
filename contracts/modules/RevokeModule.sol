@@ -6,7 +6,7 @@ import "interfaces/gnosis/IGnosisSafe.sol";
 
 import {BaseModule} from "../BaseModule.sol";
 
-contract ApprovalModule is BaseModule {
+contract RevokeModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
     // ERRORS
     ////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@ contract ApprovalModule is BaseModule {
     // EVENTS
     ////////////////////////////////////////////////////////////////////////////
 
-    event ZeroApprove(address safe, address token, address spender, uint256 timestamp);
+    event Revoked(address safe, address token, address spender, uint256 timestamp);
 
     ////////////////////////////////////////////////////////////////////////////
     // MODIFIER
@@ -44,7 +44,7 @@ contract ApprovalModule is BaseModule {
         uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);
         if (allowanceAmount > 0) {
             _checkTransactionAndExecute(safe, token, abi.encodeCall(IERC20.approve, (spender, 0)));
-            emit ZeroApprove(address(safe), token, spender, block.timestamp);
+            emit Revoked(address(safe), token, spender, block.timestamp);
         }
     }
 }
