@@ -10,6 +10,27 @@ contract BaseModule {
 
     error ExecutionFailure(address to, bytes data, uint256 timestamp);
 
+    error ModuleMisconfigured();
+
+    error NotSigner(address safe, address executor);
+
+    ////////////////////////////////////////////////////////////////////////////
+    // MODIFIER
+    ////////////////////////////////////////////////////////////////////////////
+
+    modifier isSigner(IGnosisSafe safe) {
+        address[] memory signers = safe.getOwners();
+        bool isOwner;
+        for (uint256 i; i < signers.length; i++) {
+            if (signers[i] == msg.sender) {
+                isOwner = true;
+                break;
+            }
+        }
+        if (!isOwner) revert NotSigner(address(safe), msg.sender);
+        _;
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     // INTERNAL
     ////////////////////////////////////////////////////////////////////////////

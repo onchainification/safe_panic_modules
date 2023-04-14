@@ -8,35 +8,10 @@ import {BaseModule} from "../BaseModule.sol";
 
 contract RevokeModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
-    // ERRORS
-    ////////////////////////////////////////////////////////////////////////////
-
-    error ModuleMisconfigured();
-
-    error NotSigner(address safe, address executor);
-
-    ////////////////////////////////////////////////////////////////////////////
     // EVENTS
     ////////////////////////////////////////////////////////////////////////////
 
-    event Revoked(address safe, address token, address spender, uint256 timestamp);
-
-    ////////////////////////////////////////////////////////////////////////////
-    // MODIFIER
-    ////////////////////////////////////////////////////////////////////////////
-
-    modifier isSigner(IGnosisSafe safe) {
-        address[] memory signers = safe.getOwners();
-        bool isOwner;
-        for (uint256 i; i < signers.length; i++) {
-            if (signers[i] == msg.sender) {
-                isOwner = true;
-                break;
-            }
-        }
-        if (!isOwner) revert NotSigner(address(safe), msg.sender);
-        _;
-    }
+    event Revoked(address safe, address token, address spender, address signer, uint256 timestamp);
 
     function approve(IGnosisSafe safe, address token, address spender) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
@@ -44,7 +19,7 @@ contract RevokeModule is BaseModule {
         uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);
         if (allowanceAmount > 0) {
             _checkTransactionAndExecute(safe, token, abi.encodeCall(IERC20.approve, (spender, 0)));
-            emit Revoked(address(safe), token, spender, block.timestamp);
+            emit Revoked(address(safe), token, spender, msg.sender, block.timestamp);
         }
     }
 }

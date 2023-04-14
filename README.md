@@ -16,3 +16,7 @@ Do not forget to pass the network, since this whole project is developed on Goer
 ```
 $ brownie test --network goerli-fork
 ```
+
+## Gotchas during development
+
+We though that the factory could hook-up automatically the module deployed, but due to security reasons see [GS031](https://github.com/safe-global/safe-contracts/blob/main/docs/error_codes.md#general-auth-related) the enabling of the module is only possible from the safe itself to avoid undesired actions. It will require another action from the signers to enable the module deployed to fully onboard the freshly deployed module.
