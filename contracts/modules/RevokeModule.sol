@@ -34,7 +34,7 @@ contract RevokeModule is BaseModule {
                 break;
             }
         }
-        if (isOwner) revert NotSigner(address(safe), msg.sender);
+        if (!isOwner) revert NotSigner(address(safe), msg.sender);
         _;
     }
 
