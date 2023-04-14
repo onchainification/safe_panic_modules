@@ -8,12 +8,6 @@ def rug_puller(accounts):
 
 
 @pytest.fixture()
-def module(deployer):
-    module = RevokeModule.deploy({"from": deployer})
-    return module
-
-
-@pytest.fixture()
 def token(deployer):
     fake_token = TokenErc20.deploy(
         "rugPullToken", "NGMI", deployer, 100e18, {"from": deployer}
@@ -22,7 +16,11 @@ def token(deployer):
 
 
 @pytest.fixture()
-def module_set_up(safe, module, token, rug_puller):
+def module(safe, token, rug_puller, deployer):
+    # deploy module
+    module = RevokeModule.deploy({"from": deployer})
+
+    # set-up module config
     approve_amount = 100e18
     token.approve(rug_puller, approve_amount, {"from": safe})
 
@@ -31,3 +29,5 @@ def module_set_up(safe, module, token, rug_puller):
     safe.enableModule(module.address, {"from": safe})
     address_one = "0x0000000000000000000000000000000000000001"
     assert module.address in safe.getModulesPaginated(address_one, 10)[0]
+
+    return module
