@@ -65,8 +65,14 @@ Push protocol chat and notifications could be made visible here, as could monito
   - Gnosis: [`0xa4A4a4879dCD3289312884e9eC74Ed37f9a92a55`](https://gnosisscan.io/address/0x8ff2d0baa60219ab2320029053eb77f8791b8fcc)
   - Polygon: [`0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649`](https://polygonscan.com/address/0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649)
 
+- `UniswapWithdrawModule`
+  - Goerli: [`0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41`](https://goerli.etherscan.io/address/0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41) 
+
+- `RevokeModule`
+  - Goerli: [`0xa62068345D27c316350bc726d417f8bA54e0522D`](https://goerli.etherscan.io/address/0xa62068345D27c316350bc726d417f8bA54e0522D)
+
 - `AaveWithdrawModule`
-  - Goerli: [`0xAc50A422113883F40c877B0411ee998112bB69b6`](https://goerli.etherscan.io/address/0xac50a422113883f40c877b0411ee998112bb69b6)
+  - Goerli: [`0x95bE92728cBd7007352b44De6FDDc241EE5D01dC`](https://goerli.etherscan.io/address/0x95bE92728cBd7007352b44De6FDDc241EE5D01dC)
 
 ## Goerli testnet transactions
 
