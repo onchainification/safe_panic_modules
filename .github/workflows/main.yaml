@@ -49,7 +49,7 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Prepare environment
-      run: touch .env && brownie networks import ./network-config.yaml true
+      run: touch .env && brownie networks import ./network-config.yaml True
 
     - name: Test on Goerli
       run: brownie test --network goerli-fork
