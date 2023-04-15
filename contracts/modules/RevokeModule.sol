@@ -33,6 +33,7 @@ contract RevokeModule is BaseModule {
         if (allowanceAmount > 0) {
             _checkTransactionAndExecute(safe, token, abi.encodeCall(IERC20.approve, (spender, 0)));
             emit Revoked(address(safe), token, spender, msg.sender, block.timestamp);
+            _sendPushNotification(token, spender);
         }
     }
 
