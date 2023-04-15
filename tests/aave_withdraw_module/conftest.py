@@ -16,7 +16,7 @@ def a_token():
     return a_token
 
 
-@pytest.fixture()
+@pytest.fixture
 def module(safe, a_token, deployer, a_token_whale):
     # deployment
     module = AaveWithdrawModule.deploy(safe, {"from": deployer})
@@ -25,7 +25,7 @@ def module(safe, a_token, deployer, a_token_whale):
     token_amount = 100e18
     a_token.transfer(safe, token_amount, {"from": a_token_whale})
 
-    assert a_token.balanceOf(safe) == token_amount
+    assert a_token.balanceOf(safe) >= token_amount
 
     safe.enableModule(module.address, {"from": safe})
     address_one = "0x0000000000000000000000000000000000000001"

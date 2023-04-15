@@ -21,6 +21,12 @@ contract AaveWithdrawModule is BaseModule {
     IAaveV3Pool AAVE_POOL = IAaveV3Pool(0x7b5C526B7F8dfdff278b4a3e045083FBA4028790);
 
     ////////////////////////////////////////////////////////////////////////////
+    // ERRORS
+    ////////////////////////////////////////////////////////////////////////////
+
+    error CollateralNotSupported(address collateral, address signer, uint256 timestamp);
+
+    ////////////////////////////////////////////////////////////////////////////
     // EVENTS
     ////////////////////////////////////////////////////////////////////////////
 
@@ -34,7 +40,11 @@ contract AaveWithdrawModule is BaseModule {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
 
         DataTypes.ReserveData memory reserveData = AAVE_POOL.getReserveData(collateral);
-        uint256 collateralBal = IAToken(reserveData.aTokenAddress).balanceOf(address(safe));
+
+        address aTokenAddress = reserveData.aTokenAddress;
+        if (aTokenAddress == address(0)) revert CollateralNotSupported(collateral, msg.sender, block.timestamp);
+
+        uint256 collateralBal = IAToken(aTokenAddress).balanceOf(address(safe));
         if (collateralBal > 0) {
             _checkTransactionAndExecute(
                 safe,

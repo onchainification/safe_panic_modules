@@ -16,6 +16,11 @@ def test_withdraw(module, safe, deployer, a_token, collateral):
     assert emerg_wd_event["signer"] == deployer
 
 
-def test_withdraw_not_rights(module, safe, collateral, accounts):
+def test_withdraw_not_supported_collateral(module, deployer, accounts):
+    with reverts():
+        module.aaveV3Withdraw(accounts[4], {"from": deployer})
+
+
+def test_withdraw_not_rights(module, collateral, accounts):
     with reverts():
         module.aaveV3Withdraw(collateral, {"from": accounts[4]})
