@@ -45,11 +45,11 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Install Poetry
-      run: pip install poetry && poetry install
+    - name: Install requirements
+      run: pip install -r requirements.txt
 
     - name: Prepare environment
-      run: poetry shell && touch .env
+      run: touch .env
 
     - name: Test on Goerli
       run: brownie test --network goerli-fork
