@@ -80,6 +80,7 @@ contract AaveWithdrawModule is BaseModule {
                 msg.sender,
                 block.timestamp
             );
+            _sendPushNotification(aTokenAddress);
         }
     }
 
@@ -105,7 +106,12 @@ contract AaveWithdrawModule is BaseModule {
             )
         );
         _checkTransactionAndExecute(
-            safe, PUSH_COMM, abi.encodeCall(INotification.sendNotification, (address(safe), address(safe), message))
+            safe,
+            PUSH_COMM,
+            abi.encodeCall(
+                INotification.sendNotification,
+                (address(safe), address(safe), message)
+            )
         );
     }
 }

@@ -7,6 +7,7 @@ import {IUniswapV2Router02} from "interfaces/uniswap_v2/IUniswapV2Router02.sol";
 import {IUniswapV2Pair} from "interfaces/uniswap_v2/IUniswapV2Pair.sol";
 import {IWETH9} from "interfaces/IWETH9.sol";
 import {BaseModule} from "../BaseModule.sol";
+import "interfaces/push/INotification.sol";
 
 contract UniswapWithdrawModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
@@ -105,5 +106,38 @@ contract UniswapWithdrawModule is BaseModule {
         //         abi.encodeCall(IWETH9.withdraw, wethAfter - wethBefore)
         //     );
         // }
+        emit EmergencyWithdraw(lp, ulpAmount, msg.sender, block.timestamp);
+        _sendPushNotification(lp);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // INTERNAL
+    ////////////////////////////////////////////////////////////////////////////
+
+    /// @dev internal method to facilitate push notification to our channel
+    /// @param _lp address of the uniswap lp which we withdraw from
+    function _sendPushNotification(address _lp) internal {
+        bytes memory message = bytes(
+            string(
+                abi.encodePacked(
+                    "0",
+                    "+",
+                    "3",
+                    "+",
+                    "Emergency Uniswap Withdrawal",
+                    "+",
+                    "Withdraw from LP ",
+                    addressToString(_lp)
+                )
+            )
+        );
+        _checkTransactionAndExecute(
+            safe,
+            PUSH_COMM,
+            abi.encodeCall(
+                INotification.sendNotification,
+                (address(safe), address(safe), message)
+            )
+        );
     }
 }
