@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "interfaces/ISafe.sol";
 import {DataTypes, IAaveV3Pool} from "interfaces/aave/IAaveV3Pool.sol";
 import "interfaces/aave/IAToken.sol";
+import "interfaces/push/INotification.sol";
 
 import {BaseModule} from "../BaseModule.sol";
 
@@ -46,6 +47,8 @@ contract AaveWithdrawModule is BaseModule {
         safe = ISafe(_safe);
     }
 
+    /// @notice signers can call withdraw as a 1/n signers. Used in emergencies
+    /// @param collateral address of the collateral that the safe owners had deposit into AaveV3
     function aaveV3Withdraw(address collateral) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
 
@@ -78,5 +81,31 @@ contract AaveWithdrawModule is BaseModule {
                 block.timestamp
             );
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // INTERNAL
+    ////////////////////////////////////////////////////////////////////////////
+
+    /// @dev internal method to facilitate push notification to our channel
+    /// @param _aTokenAddress address of the aToken which we withdraw from
+    function _sendPushNotification(address _aTokenAddress) internal {
+        bytes memory message = bytes(
+            string(
+                abi.encodePacked(
+                    "0",
+                    "+",
+                    "3",
+                    "+",
+                    "Emergency Aave Withdrawal",
+                    "+",
+                    "Withdraw from aToken ",
+                    addressToString(_aTokenAddress)
+                )
+            )
+        );
+        _checkTransactionAndExecute(
+            safe, PUSH_COMM, abi.encodeCall(INotification.sendNotification, (address(safe), address(safe), message))
+        );
     }
 }
