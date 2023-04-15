@@ -51,7 +51,7 @@ We experimented with deploying an [ERC20 approvals subgraph](https://github.com/
 
 Push protocol chat and notifications could be made visible here, as could monitoring of supported positions.
 
-## Goerli testnet deployments
+## Deployments
 
 - `Safe` (v1.3.0+L2)
   - Goerli: [`0x206C89813cbDE8E14582Ff94F3F1A1728C39a300`](https://app.safe.global/home?safe=gor:0x206C89813cbDE8E14582Ff94F3F1A1728C39a300)
@@ -61,10 +61,21 @@ Push protocol chat and notifications could be made visible here, as could monito
   - Goerli:
 
 - `ModuleFactory`
-  - Goerli: [`0xbaAcd51a21e9047E8E58249574532F3dc55BFC28`](https://goerli.etherscan.io/address/0xbaAcd51a21e9047E8E58249574532F3dc55BFC28)
+  - Goerli: [`0x23B2968c92558d47d2C293FebC2B3f81619ADbad`](https://goerli.etherscan.io/address/0x23B2968c92558d47d2C293FebC2B3f81619ADbad)
+  - Gnosis: [`0xa4A4a4879dCD3289312884e9eC74Ed37f9a92a55`](https://gnosisscan.io/address/0x8ff2d0baa60219ab2320029053eb77f8791b8fcc)
+  - Polygon: [`0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649`](https://polygonscan.com/address/0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649)
+
+- `UniswapWithdrawModule`
+  - Goerli: [`0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41`](https://goerli.etherscan.io/address/0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41)
+  - Polygon: [`0x4dc22908b17125ac79a16f389a7c873170251d03`](https://polygonscan.com/address/0x4dc22908b17125ac79a16f389a7c873170251d03)
+
+- `RevokeModule`
+  - Goerli: [`0xa62068345D27c316350bc726d417f8bA54e0522D`](https://goerli.etherscan.io/address/0xa62068345D27c316350bc726d417f8bA54e0522D)
+  - Polygon: [`0x6304225e3bc9db47e96ac28728cffee72e62e9b9`](https://polygonscan.com/address/0x6304225e3bc9db47e96ac28728cffee72e62e9b9)
 
 - `AaveWithdrawModule`
-  - Goerli: [`0xAc50A422113883F40c877B0411ee998112bB69b6`](https://goerli.etherscan.io/address/0xac50a422113883f40c877b0411ee998112bb69b6)
+  - Goerli: [`0x95bE92728cBd7007352b44De6FDDc241EE5D01dC`](https://goerli.etherscan.io/address/0x95bE92728cBd7007352b44De6FDDc241EE5D01dC)
+  - Polygon: [`0x23af31b6a2cc1c38b21c433c01a6fbad29f93259`](https://polygonscan.com/address/0x23af31b6a2cc1c38b21c433c01a6fbad29f93259)
 
 ## Goerli testnet transactions
 
