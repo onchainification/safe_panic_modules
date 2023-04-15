@@ -46,7 +46,7 @@ jobs:
         python-version: 3.9
 
     - name: Install Poetry
-      run: poetry install
+      run: pip install poetry && poetry install
 
     - name: Prepare environment
       run: poetry shell && touch .env
