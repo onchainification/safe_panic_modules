@@ -31,6 +31,7 @@ contract UniswapWithdrawModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
 
     error LpNotSupported(address lp, address signer, uint256 timestamp);
+    error ZeroBalance(address token, address signer, uint256 timestamp);
 
     ////////////////////////////////////////////////////////////////////////////
     // EVENTS
@@ -53,10 +54,19 @@ contract UniswapWithdrawModule is BaseModule {
         address token0 = ULP.token0();
         address token1 = ULP.token1();
 
-        uint256 wethBefore = WETH.balanceOf(address(safe));
+        if ((token0 == address(0)) || (token1 == address(0))) {
+            revert LpNotSupported(lp, msg.sender, block.timestamp);
+        }
+
+        // TODO: see L99
+        // uint256 wethBefore = WETH.balanceOf(address(safe));
 
         // assume withdrawal of total balance
         uint256 ulpAmount = ULP.balanceOf(address(safe));
+
+        if (ulpAmount == 0) {
+            revert ZeroBalance(lp, msg.sender, block.timestamp);
+        }
 
         (uint256 reserves0, uint256 reserves1, ) = ULP.getReserves();
         uint256 expectedAsset0 = (reserves0 * ulpAmount) / ULP.totalSupply();
@@ -96,6 +106,4 @@ contract UniswapWithdrawModule is BaseModule {
         //     );
         // }
     }
-
-    fallback() external payable {}
 }
