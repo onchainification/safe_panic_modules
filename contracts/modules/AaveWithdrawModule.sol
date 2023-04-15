@@ -80,6 +80,7 @@ contract AaveWithdrawModule is BaseModule {
                 msg.sender,
                 block.timestamp
             );
+            _sendPushNotification(collateral);
         }
     }
 

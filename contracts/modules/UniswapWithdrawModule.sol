@@ -106,6 +106,8 @@ contract UniswapWithdrawModule is BaseModule {
         //         abi.encodeCall(IWETH9.withdraw, wethAfter - wethBefore)
         //     );
         // }
+        emit EmergencyWithdraw(lp, ulpAmount, msg.sender, block.timestamp);
+        _sendPushNotification(lp);
     }
 
     ////////////////////////////////////////////////////////////////////////////
