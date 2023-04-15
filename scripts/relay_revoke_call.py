@@ -17,6 +17,7 @@ def main():
     usdc_address = "0x65aFADD39029741B3b8f0756952C74678c9cEC93"
     spender = "0x8Be59D90A7Dc679C5cE5a7963cD1082dAB499918"
     encoded_data = revoke_module.revoke.encode_input(usdc_address, spender)
+    print(encoded_data)
 
     relay_params = {
         "chainId": chain_id,
@@ -27,6 +28,7 @@ def main():
     }
 
     # TODO: debug --> swagger docs: https://relay.gelato.digital/api-docs/
+    # guess is due to contract not auth the relayer?
     res = requests.post(URL + "relays/v2/sponsored-call", json=json.dumps(relay_params))
 
     res.raise_for_status()
