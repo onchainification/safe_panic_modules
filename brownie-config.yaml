@@ -3,9 +3,9 @@ dotenv: .env
 autofetch_sources: true
 
 dependencies:
-  - OpenZeppelin/openzeppelin-contracts@4.5.0
+  - OpenZeppelin/openzeppelin-contracts@4.8.3
 
 compiler:
   solc:
     remappings:
-      - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.5.0"
+      - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.8.3"
