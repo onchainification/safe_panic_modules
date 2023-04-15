@@ -6,6 +6,8 @@ import "./modules/AaveWithdrawModule.sol";
 
 import "interfaces/ISafe.sol";
 
+/// @title   ModuleFactory
+/// @dev  Allows deploying easily a module targeting a specific safe environment
 contract ModuleFactory {
     ////////////////////////////////////////////////////////////////////////////
     // ERRORS
@@ -30,6 +32,10 @@ contract ModuleFactory {
         AAVE_WITHDRAW
     }
 
+    /// @dev Given a specific enum value will deploy different module
+    /// @notice Deploys a new module
+    /// @param safe target safe contract which the module is targeting
+    /// @param modType identifier of the module to be deployed
     function createModuleAndEnable(ISafe safe, ModuleType modType) external {
         if (modType == ModuleType.REVOKE_MODULE) {
             RevokeModule module = new RevokeModule(safe);
