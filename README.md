@@ -83,6 +83,7 @@ Some successful executions of these ideas on Görli to showcase these proof-of-c
 
 - Signer `0xef42` calls `aaveV3Withdraw(aTokenAddress)` on the `AaveWithdrawModule` installed on their Safe. The transaction does not need to reach threshold as normal; one alert signer is in this case enough to trigger the emergency withdrawal [[tx hash]](https://goerli.etherscan.io/tx/0x141978884ff42a91b3b0f5ea5873399a6e8795488a1da787f64b91112f915a41).
 - This Gelato task https://relay.gelato.digital/tasks/status/0x9c0a4ef4e2adfa31e0b97c356c8deec8e5253f15511c85c8b8a590c55bc9b903, initiated by a web2 guardian, triggering a revoke on-chain (`approve(owner, spender, 0)`) on an arbitrary token and spender [[tx hash]](https://goerli.etherscan.io/tx/0xde89ceb3ade10fc08e5ca6ac1c4e440870bb6b68e37cce6c822253453c387932). Signers pre-approved (the scope of) the module in advance, and were not needed to sign [[tx hash]](https://goerli.etherscan.io/tx/0xc985b717b864e05cab676c05a79e12ead62f3a96be71fecba45732c8162b53dd). Gas was paid for in advance as well [[tx hash]](https://goerli.etherscan.io/tx/0x3609db40824e899b5e61d0596fc2de84d68820e5dc759901feaac49f35e569fc).
+- Signer `0x3f99` calls `uniswapV2Withdraw()` on the uniswap module after enabling it. Without needing other signatures, the module withdraws the LP position into its underlying assets back to the multisig [[tx hash]](https://goerli.etherscan.io/tx/0x658117ad3564c07c705b93d1434564bd7816f71c8691ed40d570bc63e9452f1d).
 
 ## ETHGlobal Tokyo 2023
 
