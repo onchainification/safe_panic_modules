@@ -98,6 +98,7 @@ Some successful executions of these ideas on Görli to showcase these proof-of-c
 ## ETHGlobal Tokyo 2023
 
 This repository was initiated at the ETHGlobal Tokyo 2023 hackathon and [release v0.1](https://github.com/onchainification/safe_panic_modules/releases/tag/v0.1) was submitted as our [official submission](https://ethglobal.com/showcase/safepanicmodules-a9koj)!
-<p align="center"><img src="https://user-images.githubusercontent.com/2835259/232252978-860e4c63-4e4e-45b9-82ee-fa149270e1da.jpg" width=50% height=50%></p>
 
-どうもありがとうございます!
+<p align="center">どうもありがとうございます!</p>
+
+<p align="center"><img src="https://user-images.githubusercontent.com/2835259/232252978-860e4c63-4e4e-45b9-82ee-fa149270e1da.jpg" width=50% height=50%></p>
