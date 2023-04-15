@@ -66,13 +66,16 @@ Push protocol chat and notifications could be made visible here, as could monito
   - Polygon: [`0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649`](https://polygonscan.com/address/0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649)
 
 - `UniswapWithdrawModule`
-  - Goerli: [`0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41`](https://goerli.etherscan.io/address/0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41) 
+  - Goerli: [`0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41`](https://goerli.etherscan.io/address/0x4de04c364EaF1C5b10A44b776140b2CAC47A5A41)
+  - Polygon: [`0x4dc22908b17125ac79a16f389a7c873170251d03`](https://polygonscan.com/address/0x4dc22908b17125ac79a16f389a7c873170251d03)
 
 - `RevokeModule`
   - Goerli: [`0xa62068345D27c316350bc726d417f8bA54e0522D`](https://goerli.etherscan.io/address/0xa62068345D27c316350bc726d417f8bA54e0522D)
+  - Polygon: [`0x6304225e3bc9db47e96ac28728cffee72e62e9b9`](https://polygonscan.com/address/0x6304225e3bc9db47e96ac28728cffee72e62e9b9)
 
 - `AaveWithdrawModule`
   - Goerli: [`0x95bE92728cBd7007352b44De6FDDc241EE5D01dC`](https://goerli.etherscan.io/address/0x95bE92728cBd7007352b44De6FDDc241EE5D01dC)
+  - Polygon: [`0x23af31b6a2cc1c38b21c433c01a6fbad29f93259`](https://polygonscan.com/address/0x23af31b6a2cc1c38b21c433c01a6fbad29f93259)
 
 ## Goerli testnet transactions
 
