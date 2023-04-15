@@ -89,12 +89,15 @@ Some successful executions of these ideas on Görli to showcase these proof-of-c
 ## Gnosis transactions
 
 - The multisig wants to swap on CoW Swap and approves the CoW Protocol Vault Relayer for 10 wxDAI [[tx hash]](https://gnosisscan.io/tx/0xa5698387f8887ef4d68cfbb9ffc6a5f8144ac483081af19a50eef77470dfbb87/#eventlog). The gas costs for this transaction are sponsored by Gnosis, and no gas fees are paid for execution.
-- Signer `0x` calls `revoke(token, spender)` on the `RevokeModule`. Without needing other signers, the wxDAI is revoked [[tx hash]](https://gnosisscan.io/tx/0x784ad79b53c7ebe91005bfc67ba16d13535c90592d84d14f6a20bcedad7351aa#eventlog).
+- Signer `0x1377` calls `revoke(token, spender)` on the `RevokeModule`. Without needing other signers, the wxDAI allowance is revoked [[tx hash]](https://gnosisscan.io/tx/0x784ad79b53c7ebe91005bfc67ba16d13535c90592d84d14f6a20bcedad7351aa#eventlog).
+
+## Polygon transactions
+
+- Signer `0x1377` calls `revoke(token, spender)` on the `RevokeModule`. Without needing other signers, the WETH allowance is revoked [[tx hash]](https://polygonscan.com/tx/0xf97b1d02f2ecd02926f3114fc516bb1983bd1c303ed7094703c22ccc011c25e8#eventlog).
 
 ## ETHGlobal Tokyo 2023
 
 This repository was initiated at the ETHGlobal Tokyo 2023 hackathon and [release v0.1](https://github.com/onchainification/safe_panic_modules/releases/tag/v0.1) was submitted as our [official submission](https://ethglobal.com/showcase/safepanicmodules-a9koj)!
-
-![3b8d0d95-36d6-4796-952c-dff875e77f40-2](https://user-images.githubusercontent.com/2835259/232252978-860e4c63-4e4e-45b9-82ee-fa149270e1da.jpg)
+<p align="center"><img src="https://user-images.githubusercontent.com/2835259/232252978-860e4c63-4e4e-45b9-82ee-fa149270e1da.jpg" width=50% height=50%></p>
 
 どうもありがとうございます!
