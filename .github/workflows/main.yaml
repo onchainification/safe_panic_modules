@@ -1,0 +1,61 @@
+on:
+  # https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+name: brownie tests
+
+env:
+  ETHERSCAN_TOKEN: ${{ secrets.ETHERSCAN_TOKEN }}
+  POLYGONSCAN_TOKEN: ${{ secrets.POLYGONSCAN_TOKEN }}
+  ALCHEMY_KEY_GOERLI: ${{ secrets.ALCHEMY_KEY_GOERLI }}
+  ALCHEMY_KEY_POLYGON: ${{ secrets.ALCHEMY_KEY_POLYGON }}
+  PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # increasing available memory for node reduces issues with ganache crashing
+  # https://nodejs.org/api/cli.html#cli_max_old_space_size_size_in_megabytes
+  NODE_OPTIONS: --max_old_space_size=4096
+
+jobs:
+
+  full_test_suite:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install compiler caches
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.solcx
+          ~/.vvm
+        key: compiler-cache
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+
+    - name: Install Ganache CLI
+      run: npm install -g ganache-cli@6.12.2
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install requirements
+      run: pip install -r requirements.txt
+
+    - name: Prepare environment
+      run: touch .env && brownie networks delete goerli && brownie networks import ./network-config.yaml
+
+    - name: Test on Goerli
+      run: brownie test --network goerli-fork
+
+    - name: Test on Gnosis
+      run: brownie test --network gnosis-fork
+
+    - name: Test on Polygon
+      run: brownie test --network polygon-fork

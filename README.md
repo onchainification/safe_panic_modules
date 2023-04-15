@@ -25,3 +25,9 @@ We thought that the factory could hook up the deployed module automatically, but
 
 - `ModuleFactory`
   - Goerli: [0xbaAcd51a21e9047E8E58249574532F3dc55BFC28](https://goerli.etherscan.io/address/0xbaAcd51a21e9047E8E58249574532F3dc55BFC28)
+
+
+## Regenerate `requirements.txt` after updating packages
+```
+poetry export -f requirements.txt --output requirements.txt --without-hashes
+```
