@@ -3,6 +3,7 @@ pragma solidity ^0.8.4;
 
 import "./modules/RevokeModule.sol";
 import "./modules/AaveWithdrawModule.sol";
+import "./modules/UniswapWithdrawModule.sol";
 
 import "interfaces/ISafe.sol";
 
@@ -34,7 +35,8 @@ contract ModuleFactory {
 
     enum ModuleType {
         REVOKE_MODULE,
-        AAVE_WITHDRAW
+        AAVE_WITHDRAW,
+        UNISWAP_WITHDRAW
     }
 
     /// @dev Given a specific enum value will deploy different module
@@ -55,6 +57,14 @@ contract ModuleFactory {
             emit ModuleDeployed(
                 address(module),
                 ModuleType.AAVE_WITHDRAW,
+                msg.sender,
+                block.timestamp
+            );
+        } else if (modType == ModuleType.UNISWAP_WITHDRAW) {
+            UniswapWithdrawModule module = new UniswapWithdrawModule(safe);
+            emit ModuleDeployed(
+                address(module),
+                ModuleType.UNISWAP_WITHDRAW,
                 msg.sender,
                 block.timestamp
             );
