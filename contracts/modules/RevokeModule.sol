@@ -2,13 +2,12 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/metatx/ERC2771Context.sol";
 import "interfaces/ISafe.sol";
 import "interfaces/push/INotification.sol";
 
 import {BaseModule} from "../BaseModule.sol";
 
-contract RevokeModule is BaseModule, ERC2771Context {
+contract RevokeModule is BaseModule {
     ////////////////////////////////////////////////////////////////////////////
     // INMUTABLE VARIABLES
     ////////////////////////////////////////////////////////////////////////////
@@ -20,7 +19,7 @@ contract RevokeModule is BaseModule, ERC2771Context {
 
     event Revoked(address safe, address token, address spender, address signer, uint256 timestamp);
 
-    constructor(ISafe _safe) ERC2771Context(GELATO_TRUSTED_FORWARDED) {
+    constructor(ISafe _safe) {
         safe = ISafe(_safe);
     }
 
@@ -29,17 +28,6 @@ contract RevokeModule is BaseModule, ERC2771Context {
     /// @param spender address which allowance is going to be set to zero
     function revoke(address token, address spender) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
-
-        uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);
-        if (allowanceAmount > 0) {
-            _checkTransactionAndExecute(safe, token, abi.encodeCall(IERC20.approve, (spender, 0)));
-            emit Revoked(address(safe), token, spender, msg.sender, block.timestamp);
-        }
-    }
-
-    function revokeViaRelayer(address token, address spender) external {
-        if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
-        if (!isTrustedForwarder(msg.sender)) revert NotTrustedForwarded(msg.sender);
 
         uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);
         if (allowanceAmount > 0) {

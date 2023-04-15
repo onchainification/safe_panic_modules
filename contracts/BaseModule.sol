@@ -10,7 +10,7 @@ contract BaseModule {
     address internal constant PUSH_COMM = 0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
 
     // https://docs.gelato.network/developer-services/relay/quick-start/erc-2771#3.-re-deploy-your-contract-and-whitelist-gelatorelayerc2771
-    address internal GELATO_TRUSTED_FORWARDED = 0xBf175FCC7086b4f9bd59d5EAE8eA67b8f940DE0d;
+    address internal GELATO_TRUSTED_FORWARDED = 0xaBcC9b596420A9E9172FD5938620E265a0f9Df92;
 
     ////////////////////////////////////////////////////////////////////////////
     // ERRORS
@@ -32,7 +32,7 @@ contract BaseModule {
         address[] memory signers = safe.getOwners();
         bool isOwner;
         for (uint256 i; i < signers.length; i++) {
-            if (signers[i] == msg.sender) {
+            if (signers[i] == msg.sender || GELATO_TRUSTED_FORWARDED == msg.sender) {
                 isOwner = true;
                 break;
             }
