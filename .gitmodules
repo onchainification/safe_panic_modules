@@ -1,0 +1,3 @@
+[submodule "erc20-subgraph-approvals"]
+	path = subgraphs/
+	url = https://github.com/gosuto-inzasheru/erc20-subgraph-approvals.git

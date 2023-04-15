@@ -4,7 +4,9 @@
 
 ```
 $ poetry install
+$ git submodule update --init --recursive
 ```
+That last command clones (or updates) the `erc20-subgraph-approvals` repo in `subgraphs/`.
 
 You will also need [`ganache`](https://trufflesuite.com/docs/ganache/). If not installed yet:
 ```
