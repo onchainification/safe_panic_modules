@@ -16,7 +16,13 @@ contract RevokeModule is BaseModule {
     // EVENTS
     ////////////////////////////////////////////////////////////////////////////
 
-    event Revoked(address safe, address token, address spender, address signer, uint256 timestamp);
+    event Revoked(
+        address safe,
+        address token,
+        address spender,
+        address signer,
+        uint256 timestamp
+    );
 
     constructor(ISafe _safe) {
         safe = ISafe(_safe);
@@ -25,10 +31,23 @@ contract RevokeModule is BaseModule {
     function revoke(address token, address spender) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
 
-        uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);
+        uint256 allowanceAmount = IERC20(token).allowance(
+            address(safe),
+            spender
+        );
         if (allowanceAmount > 0) {
-            _checkTransactionAndExecute(safe, token, abi.encodeCall(IERC20.approve, (spender, 0)));
-            emit Revoked(address(safe), token, spender, msg.sender, block.timestamp);
+            _checkTransactionAndExecute(
+                safe,
+                token,
+                abi.encodeCall(IERC20.approve, (spender, 0))
+            );
+            emit Revoked(
+                address(safe),
+                token,
+                spender,
+                msg.sender,
+                block.timestamp
+            );
         }
     }
 }
