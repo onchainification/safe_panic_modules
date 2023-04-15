@@ -3,6 +3,11 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 interface ISafe {
+     enum Operation {
+        Call,
+        DelegateCall
+    }
+
     event AddedOwner(address indexed owner);
     event ApproveHash(bytes32 indexed approvedHash, address indexed owner);
     event ChangedFallbackHandler(address indexed handler);
@@ -86,14 +91,14 @@ interface ISafe {
         address to,
         uint256 value,
         bytes memory data,
-        uint8 operation
+        Operation operation
     ) external returns (bool success);
 
     function execTransactionFromModuleReturnData(
         address to,
         uint256 value,
         bytes memory data,
-        uint8 operation
+        Operation operation
     ) external returns (bool success, bytes memory returnData);
 
     function getChainId() external view returns (uint256);
