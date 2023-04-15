@@ -18,7 +18,7 @@ def token(deployer):
 @pytest.fixture()
 def module(safe, token, rug_puller, deployer):
     # deploy module
-    module = RevokeModule.deploy({"from": deployer})
+    module = RevokeModule.deploy(safe, {"from": deployer})
 
     # set-up module config
     approve_amount = 100e18
