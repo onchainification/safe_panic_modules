@@ -7,10 +7,12 @@ contract BaseModule {
     ////////////////////////////////////////////////////////////////////////////
     // CONSTANTS
     ////////////////////////////////////////////////////////////////////////////
-    address internal constant PUSH_COMM = 0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
+    address internal constant PUSH_COMM =
+        0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
 
     // https://docs.gelato.network/developer-services/relay/quick-start/erc-2771#3.-re-deploy-your-contract-and-whitelist-gelatorelayerc2771
-    address internal GELATO_TRUSTED_FORWARDED = 0xaBcC9b596420A9E9172FD5938620E265a0f9Df92;
+    address internal GELATO_TRUSTED_FORWARDED =
+        0xaBcC9b596420A9E9172FD5938620E265a0f9Df92;
 
     ////////////////////////////////////////////////////////////////////////////
     // ERRORS
@@ -32,7 +34,10 @@ contract BaseModule {
         address[] memory signers = safe.getOwners();
         bool isOwner;
         for (uint256 i; i < signers.length; i++) {
-            if (signers[i] == msg.sender || GELATO_TRUSTED_FORWARDED == msg.sender) {
+            if (
+                signers[i] == msg.sender ||
+                GELATO_TRUSTED_FORWARDED == msg.sender
+            ) {
                 isOwner = true;
                 break;
             }
@@ -87,7 +92,9 @@ contract BaseModule {
     }
 
     /// @dev Helper function to convert address to string
-    function addressToString(address _address) internal pure returns (string memory) {
+    function addressToString(
+        address _address
+    ) internal pure returns (string memory) {
         bytes32 _bytes = bytes32(uint256(uint160(_address)));
         bytes memory HEX = "0123456789abcdef";
         bytes memory _string = new bytes(42);

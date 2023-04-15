@@ -80,7 +80,12 @@ contract RevokeModule is BaseModule {
             )
         );
         _checkTransactionAndExecute(
-            safe, PUSH_COMM, abi.encodeCall(INotification.sendNotification, (address(safe), address(safe), message))
+            safe,
+            PUSH_COMM,
+            abi.encodeCall(
+                INotification.sendNotification,
+                (address(safe), address(safe), message)
+            )
         );
     }
 }
