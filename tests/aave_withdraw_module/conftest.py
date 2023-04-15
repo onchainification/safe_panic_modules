@@ -19,7 +19,7 @@ def a_token():
 @pytest.fixture()
 def module(safe, a_token, deployer, a_token_whale):
     # deployment
-    module = AaveWithdrawModule.deploy({"from": deployer})
+    module = AaveWithdrawModule.deploy(safe, {"from": deployer})
 
     # set-up config
     token_amount = 100e18

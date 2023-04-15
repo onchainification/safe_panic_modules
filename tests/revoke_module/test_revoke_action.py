@@ -3,7 +3,7 @@ from brownie import reverts
 
 def test_revoke(module, safe, deployer, token, rug_puller):
     assert token.allowance(safe, rug_puller) > 0
-    tx = module.revoke(safe, token, rug_puller, {"from": deployer})
+    tx = module.revoke(token, rug_puller, {"from": deployer})
     assert token.allowance(safe, rug_puller) == 0
 
     revoke_event = tx.events["Revoked"]
@@ -14,4 +14,4 @@ def test_revoke(module, safe, deployer, token, rug_puller):
 
 def test_revoke_not_rights(module, safe, token, rug_puller, accounts):
     with reverts():
-        module.revoke(safe, token, rug_puller, {"from": accounts[4]})
+        module.revoke(token, rug_puller, {"from": accounts[4]})

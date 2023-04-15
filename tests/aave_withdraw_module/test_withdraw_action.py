@@ -5,7 +5,7 @@ def test_withdraw(module, safe, deployer, a_token, collateral):
     assert a_token.balanceOf(safe) > 0
     assert collateral.balanceOf(safe) == 0
     a_token_balance = a_token.balanceOf(safe)
-    tx = module.aaveV3Withdraw(safe, collateral, {"from": deployer})
+    tx = module.aaveV3Withdraw(collateral, {"from": deployer})
     assert a_token.balanceOf(safe) == 0
     assert collateral.balanceOf(safe) > 0
 
@@ -18,4 +18,4 @@ def test_withdraw(module, safe, deployer, a_token, collateral):
 
 def test_withdraw_not_rights(module, safe, collateral, accounts):
     with reverts():
-        module.aaveV3Withdraw(safe, collateral, {"from": accounts[4]})
+        module.aaveV3Withdraw(collateral, {"from": accounts[4]})

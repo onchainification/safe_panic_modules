@@ -2,13 +2,18 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "interfaces/gnosis/IGnosisSafe.sol";
+import "interfaces/ISafe.sol";
 import {DataTypes, IAaveV3Pool} from "interfaces/aave/IAaveV3Pool.sol";
 import "interfaces/aave/IAToken.sol";
 
 import {BaseModule} from "../BaseModule.sol";
 
 contract AaveWithdrawModule is BaseModule {
+    ////////////////////////////////////////////////////////////////////////////
+    // INMUTABLE VARIABLES
+    ////////////////////////////////////////////////////////////////////////////
+    ISafe public immutable safe;
+
     ////////////////////////////////////////////////////////////////////////////
     // CONSTANTS
     ////////////////////////////////////////////////////////////////////////////
@@ -21,7 +26,11 @@ contract AaveWithdrawModule is BaseModule {
 
     event EmergencyWithdraw(address asset, uint256 amount, address signer, uint256 timestamp);
 
-    function aaveV3Withdraw(IGnosisSafe safe, address collateral) external isSigner(safe) {
+    constructor(ISafe _safe) {
+        safe = ISafe(_safe);
+    }
+
+    function aaveV3Withdraw(address collateral) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
 
         DataTypes.ReserveData memory reserveData = AAVE_POOL.getReserveData(collateral);
