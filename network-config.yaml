@@ -1,0 +1,62 @@
+live:
+  - name: Goerli
+    networks:
+      - name: Goerli
+        chainid: 5
+        id: goerli
+        host: https://eth-goerli.g.alchemy.com/v2/$ALCHEMY_KEY_GOERLI
+        explorer: https://api-goerli.etherscan.io/api
+        multicall2: "0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696"
+  - name: Polygon
+    networks:
+      - name: Polygon
+        chainid: 137
+        id: polygon
+        host: https://polygon-mainnet.g.alchemy.com/v2/$ALCHEMY_KEY_POLYGON
+        explorer: https://api.polygonscan.com/api
+        multicall2: "0xc8E51042792d7405184DfCa245F2d27B94D013b6"
+  - name: Gnosis
+    networks:
+      - name: Gnosis
+        chainid: 100
+        id: gnosis
+        host: https://rpc.gnosis.gateway.fm
+        explorer: https://gnosisscan.io/
+
+development:
+  - name: Ganache-CLI (Goerli Fork)
+    id: goerli-fork
+    cmd: ganache-cli
+    host: http://127.0.0.1
+    timeout: 120
+    cmd_settings:
+      port: 8545
+      gas_limit: 20000000
+      accounts: 10
+      evm_version: istanbul
+      mnemonic: brownie
+      fork: goerli
+  - name: Ganache-CLI (Gnosis Fork)
+    id: gnosis-fork
+    cmd: ganache-cli
+    host: http://127.0.0.1
+    timeout: 120
+    cmd_settings:
+      port: 8545
+      gas_limit: 20000000
+      accounts: 10
+      evm_version: istanbul
+      mnemonic: brownie
+      fork: gnosis
+  - name: Ganache-CLI (Polygon Fork)
+    id: polygon-fork
+    cmd: ganache-cli
+    host: http://127.0.0.1
+    timeout: 120
+    cmd_settings:
+      port: 8545
+      gas_limit: 20000000
+      accounts: 10
+      evm_version: istanbul
+      mnemonic: brownie
+      fork: polygon
