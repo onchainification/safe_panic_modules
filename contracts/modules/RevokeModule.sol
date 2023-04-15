@@ -52,7 +52,7 @@ contract RevokeModule is BaseModule {
                 msg.sender,
                 block.timestamp
             );
-            _sendPushNotification(token, spender)
+            _sendPushNotification(token, spender);
         }
     }
 
