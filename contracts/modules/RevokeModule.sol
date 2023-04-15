@@ -22,6 +22,9 @@ contract RevokeModule is BaseModule {
         safe = ISafe(_safe);
     }
 
+    /// @notice sets allowance to zero for specific token and spender
+    /// @param token token address which we will trigger the revoking
+    /// @param spender address which allowance is going to be set to zero
     function revoke(address token, address spender) external isSigner(safe) {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
 
