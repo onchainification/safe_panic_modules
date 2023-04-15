@@ -59,19 +59,9 @@ contract AaveWithdrawModule is BaseModule {
         }
     }
 
-    /// @dev Helper function to convert address to string
-    function addressToString(address _address) internal pure returns (string memory) {
-        bytes32 _bytes = bytes32(uint256(uint160(_address)));
-        bytes memory HEX = "0123456789abcdef";
-        bytes memory _string = new bytes(42);
-        _string[0] = "0";
-        _string[1] = "x";
-        for (uint256 i = 0; i < 20; i++) {
-            _string[2 + i * 2] = HEX[uint8(_bytes[i + 12] >> 4)];
-            _string[3 + i * 2] = HEX[uint8(_bytes[i + 12] & 0x0f)];
-        }
-        return string(_string);
-    }
+    ////////////////////////////////////////////////////////////////////////////
+    // INTERNAL
+    ////////////////////////////////////////////////////////////////////////////
 
     /// @dev internal method to facilitate push notification to our channel
     /// @param _aTokenAddress address of the aToken which we withdraw from
@@ -84,16 +74,14 @@ contract AaveWithdrawModule is BaseModule {
                     "3",
                     "+",
                     "Emergency Aave Withdrawal",
-                    "+", // segregator
-                    "Withdraw from aToken",
+                    "+",
+                    "Withdraw from aToken ",
                     addressToString(_aTokenAddress)
                 )
             )
         );
         _checkTransactionAndExecute(
-            safe,
-            PUSH_COMM,
-            abi.encodeCall(INotification.sendNotification, (address(safe), address(safe), message))
+            safe, PUSH_COMM, abi.encodeCall(INotification.sendNotification, (address(safe), address(safe), message))
         );
     }
 }

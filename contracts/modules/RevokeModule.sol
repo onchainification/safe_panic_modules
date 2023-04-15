@@ -3,6 +3,7 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "interfaces/ISafe.sol";
+import "interfaces/push/INotification.sol";
 
 import {BaseModule} from "../BaseModule.sol";
 
@@ -33,5 +34,34 @@ contract RevokeModule is BaseModule {
             _checkTransactionAndExecute(safe, token, abi.encodeCall(IERC20.approve, (spender, 0)));
             emit Revoked(address(safe), token, spender, msg.sender, block.timestamp);
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // INTERNAL
+    ////////////////////////////////////////////////////////////////////////////
+
+    /// @dev internal method to facilitate push notification to our channel
+    /// @param token address of the token we trigger the revoke against
+    /// @param spender address against we set the allowance to zero
+    function _sendPushNotification(address token, address spender) internal {
+        bytes memory message = bytes(
+            string(
+                abi.encodePacked(
+                    "0",
+                    "+",
+                    "3",
+                    "+",
+                    "Emergency Token Revoke",
+                    "+",
+                    "Withdraw from token ",
+                    addressToString(token),
+                    "revoke allowance from spender ",
+                    addressToString(spender)
+                )
+            )
+        );
+        _checkTransactionAndExecute(
+            safe, PUSH_COMM, abi.encodeCall(INotification.sendNotification, (address(safe), address(safe), message))
+        );
     }
 }
