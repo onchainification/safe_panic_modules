@@ -61,7 +61,9 @@ Push protocol chat and notifications could be made visible here, as could monito
   - Goerli:
 
 - `ModuleFactory`
-  - Goerli: [`0xbaAcd51a21e9047E8E58249574532F3dc55BFC28`](https://goerli.etherscan.io/address/0xbaAcd51a21e9047E8E58249574532F3dc55BFC28)
+  - Goerli: [`0x23B2968c92558d47d2C293FebC2B3f81619ADbad`](https://goerli.etherscan.io/address/0x23B2968c92558d47d2C293FebC2B3f81619ADbad)
+  - Gnosis: [`0xa4A4a4879dCD3289312884e9eC74Ed37f9a92a55`](https://gnosisscan.io/address/0x8ff2d0baa60219ab2320029053eb77f8791b8fcc)
+  - Polygon: [`0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649`](https://polygonscan.com/address/0x7F86dC36db7ec0eBF9E697a6267f88623Eb7D649)
 
 - `AaveWithdrawModule`
   - Goerli: [`0xAc50A422113883F40c877B0411ee998112bB69b6`](https://goerli.etherscan.io/address/0xac50a422113883f40c877b0411ee998112bb69b6)
