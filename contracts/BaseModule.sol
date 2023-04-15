@@ -9,6 +9,9 @@ contract BaseModule {
     ////////////////////////////////////////////////////////////////////////////
     address internal constant PUSH_COMM = 0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
 
+    // https://docs.gelato.network/developer-services/relay/quick-start/erc-2771#3.-re-deploy-your-contract-and-whitelist-gelatorelayerc2771
+    address internal GELATO_TRUSTED_FORWARDED = 0xBf175FCC7086b4f9bd59d5EAE8eA67b8f940DE0d;
+
     ////////////////////////////////////////////////////////////////////////////
     // ERRORS
     ////////////////////////////////////////////////////////////////////////////
@@ -18,6 +21,8 @@ contract BaseModule {
     error ModuleMisconfigured();
 
     error NotSigner(address safe, address executor);
+
+    error NotTrustedForwarded(address forwarded);
 
     ////////////////////////////////////////////////////////////////////////////
     // MODIFIER

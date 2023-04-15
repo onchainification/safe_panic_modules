@@ -2,6 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/metatx/ERC2771Context.sol";
 import "interfaces/ISafe.sol";
 import {DataTypes, IAaveV3Pool} from "interfaces/aave/IAaveV3Pool.sol";
 import "interfaces/aave/IAToken.sol";
@@ -9,7 +10,7 @@ import "interfaces/push/INotification.sol";
 
 import {BaseModule} from "../BaseModule.sol";
 
-contract AaveWithdrawModule is BaseModule {
+contract AaveWithdrawModule is BaseModule, ERC2771Context {
     ////////////////////////////////////////////////////////////////////////////
     // INMUTABLE VARIABLES
     ////////////////////////////////////////////////////////////////////////////
@@ -33,7 +34,7 @@ contract AaveWithdrawModule is BaseModule {
 
     event EmergencyWithdraw(address asset, uint256 amount, address signer, uint256 timestamp);
 
-    constructor(ISafe _safe) {
+    constructor(ISafe _safe) ERC2771Context(GELATO_TRUSTED_FORWARDED) {
         safe = ISafe(_safe);
     }
 
