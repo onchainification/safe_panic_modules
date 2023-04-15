@@ -1,5 +1,4 @@
 import os
-import json
 import requests
 
 from brownie import chain, RevokeModule
