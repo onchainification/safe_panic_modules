@@ -1,4 +1,4 @@
-from brownie import reverts
+from brownie import accounts, reverts
 
 
 def test_withdraw_uniswap_v2(safe, module, ulp, ulp_whale, deployer):
@@ -23,3 +23,8 @@ def test_withdraw_uniswap_v2_no_balance(safe, module, ulp, deployer):
 
     with reverts():
         module.uniswapV2Withdraw(ulp.address, {"from": deployer})
+
+
+def test_withdraw_uniswap_v2_false_ulp(module, deployer):
+    with reverts():
+        module.uniswapV2Withdraw(accounts[5], {"from": deployer})
