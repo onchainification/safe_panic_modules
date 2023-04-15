@@ -51,7 +51,7 @@ We experimented with deploying an [ERC20 approvals subgraph](https://github.com/
 
 Push protocol chat and notifications could be made visible here, as could monitoring of supported positions.
 
-## Goerli testnet deployments
+## Deployments
 
 - `Safe` (v1.3.0+L2)
   - Goerli: [`0x206C89813cbDE8E14582Ff94F3F1A1728C39a300`](https://app.safe.global/home?safe=gor:0x206C89813cbDE8E14582Ff94F3F1A1728C39a300)
