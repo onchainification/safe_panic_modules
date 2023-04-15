@@ -39,7 +39,7 @@ contract RevokeModule is BaseModule, ERC2771Context {
 
     function revokeViaRelayer(address token, address spender) external {
         if (!safe.isModuleEnabled(address(this))) revert ModuleMisconfigured();
-        if (!(_msgSender() == GELATO_TRUSTED_FORWARDED)) revert NotTrustedForwarded(msg.sender);
+        if (!isTrustedForwarder(msg.sender)) revert NotTrustedForwarded(msg.sender);
 
         uint256 allowanceAmount = IERC20(token).allowance(address(safe), spender);
         if (allowanceAmount > 0) {
