@@ -57,8 +57,9 @@ Push protocol chat and notifications could be made visible here, as could monito
   - Goerli: [`0x206C89813cbDE8E14582Ff94F3F1A1728C39a300`](https://app.safe.global/home?safe=gor:0x206C89813cbDE8E14582Ff94F3F1A1728C39a300)
   - Gnosis: [`0xa4A4a4879dCD3289312884e9eC74Ed37f9a92a55`](https://app.safe.global/home?safe=gno:0xa4A4a4879dCD3289312884e9eC74Ed37f9a92a55)
   - Polygon: [`0xaC15894d64024e4853b78470e68c448Ba9e04Ea4`](https://app.safe.global/home?safe=matic:0xaC15894d64024e4853b78470e68c448Ba9e04Ea4)
-- `Safe` (v.1.4.0)
-  - Goerli:
+  
+- `Safe` (v.1.4.0, [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) enabled!)
+  - Polygon: [`0xC134B6c9994E56bfE07156873814A0BD7E360dc0`](https://app.safe.global/home?safe=matic:0xC134B6c9994E56bfE07156873814A0BD7E360dc0)
 
 - `ModuleFactory`
   - Goerli: [`0x23B2968c92558d47d2C293FebC2B3f81619ADbad`](https://goerli.etherscan.io/address/0x23B2968c92558d47d2C293FebC2B3f81619ADbad)
